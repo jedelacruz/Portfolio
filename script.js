@@ -1,4 +1,61 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Intro: blank → J → E → reveal (slower, clearer)
+    const overlay = document.getElementById('intro-overlay');
+    const introJ = document.getElementById('intro-j');
+    const introE = document.getElementById('intro-e');
+    const INTRO_KEY = 'portfolio-intro-seen';
+    const hasSeenIntro = (() => {
+        try { return sessionStorage.getItem(INTRO_KEY) === '1'; } catch (_) { return false; }
+    })();
+
+    if (overlay && hasSeenIntro) {
+        overlay.classList.add('done');
+        overlay.setAttribute('aria-hidden', 'true');
+    } else if (overlay && introJ && introE) {
+        const t = (ms) => new Promise((r) => setTimeout(r, ms));
+        (async () => {
+            await t(550);
+            introJ.classList.add('show');
+            await t(480);
+            introE.classList.add('show');
+            await t(1100);
+            overlay.classList.add('done');
+            await t(950);
+            overlay.setAttribute('aria-hidden', 'true');
+            try { sessionStorage.setItem(INTRO_KEY, '1'); } catch (_) {}
+        })();
+    }
+
+    // Back-to-top visibility on scroll (navbar always visible now)
+    const backToTop = document.getElementById('back-to-top');
+    const backToTopThreshold = 400;
+    function updateBackToTop() {
+        if (!backToTop) return;
+        if (window.scrollY > backToTopThreshold) backToTop.classList.add('visible');
+        else backToTop.classList.remove('visible');
+    }
+    window.addEventListener('scroll', updateBackToTop, { passive: true });
+    setTimeout(updateBackToTop, 100);
+
+    if (backToTop) {
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        const id = a.getAttribute('href');
+        if (id === '#') return;
+        a.addEventListener('click', (e) => {
+            const el = document.querySelector(id);
+            if (el) {
+                e.preventDefault();
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
     // Custom cursor with smoke trail (desktop only)
     const cursor = document.getElementById('custom-cursor');
     const trail = document.getElementById('cursor-trail');
@@ -42,9 +99,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const themeBtn = document.getElementById('theme-toggle');
     const body = document.body;
-    themeBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-    });
+    if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+        });
+    }
+
+    // Mobile navbar layout: single centered pill (move utils into main nav)
+    const mainNavbar = document.getElementById('navbar');
+    const mainLinks = document.querySelector('#navbar .navbar-links');
+    const rightNavbar = document.querySelector('.navbar.navbar-right');
+    const colorPickerWrap = document.querySelector('.navbar-right .color-picker-wrap') || document.querySelector('#navbar .color-picker-wrap');
+
+    const originalParents = {
+        colorPickerWrapParent: colorPickerWrap?.parentElement || null,
+        themeBtnParent: themeBtn?.parentElement || null,
+    };
+
+    function syncNavbarLayout() {
+        const isMobile = window.matchMedia('(max-width: 640px)').matches;
+        if (!mainNavbar || !mainLinks || !rightNavbar || !colorPickerWrap || !themeBtn) return;
+
+        if (isMobile) {
+            // Put utils inside the main pill
+            if (!mainLinks.contains(colorPickerWrap)) mainLinks.appendChild(colorPickerWrap);
+            if (!mainLinks.contains(themeBtn)) mainLinks.appendChild(themeBtn);
+            rightNavbar.style.display = 'none';
+        } else {
+            // Put utils back into the right pill
+            const rightInner = rightNavbar.querySelector('.navbar-inner');
+            if (rightInner) {
+                if (!rightInner.contains(colorPickerWrap)) rightInner.appendChild(colorPickerWrap);
+                if (!rightInner.contains(themeBtn)) rightInner.appendChild(themeBtn);
+            } else {
+                // Fallback to original parents if markup changes
+                if (originalParents.colorPickerWrapParent && !originalParents.colorPickerWrapParent.contains(colorPickerWrap)) {
+                    originalParents.colorPickerWrapParent.appendChild(colorPickerWrap);
+                }
+                if (originalParents.themeBtnParent && !originalParents.themeBtnParent.contains(themeBtn)) {
+                    originalParents.themeBtnParent.appendChild(themeBtn);
+                }
+            }
+            rightNavbar.style.display = '';
+        }
+    }
+    syncNavbarLayout();
+    window.addEventListener('resize', syncNavbarLayout);
+
+    // Accent color picker
+    const colorPickerBtn = document.getElementById('color-picker-btn');
+    const colorPickerDropdown = document.getElementById('color-picker-dropdown');
+    const ACCENT_KEY = 'portfolio-accent';
+
+    function setAccent(accent) {
+        body.classList.remove('accent-blue', 'accent-emerald', 'accent-violet', 'accent-amber', 'accent-rose');
+        body.classList.add('accent-' + accent);
+        try { localStorage.setItem(ACCENT_KEY, accent); } catch (_) {}
+        document.querySelectorAll('.color-swatch').forEach((sw) => {
+            sw.classList.toggle('active', sw.getAttribute('data-accent') === accent);
+        });
+    }
+
+    const saved = localStorage.getItem(ACCENT_KEY);
+    if (saved && ['blue', 'emerald', 'violet', 'amber', 'rose'].includes(saved)) setAccent(saved);
+    else document.querySelector('.color-swatch[data-accent="blue"]')?.classList.add('active');
+
+    if (colorPickerBtn && colorPickerWrap && colorPickerDropdown) {
+        colorPickerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            colorPickerWrap.classList.toggle('open');
+        });
+        document.addEventListener('click', (e) => {
+            if (!colorPickerWrap.contains(e.target)) colorPickerWrap.classList.remove('open');
+        });
+        colorPickerDropdown.querySelectorAll('.color-swatch').forEach((sw) => {
+            sw.addEventListener('click', () => {
+                setAccent(sw.getAttribute('data-accent'));
+            });
+        });
+    }
 
     const bannerWrapper = document.getElementById('banner-wrapper');
     const bannerBtn = document.getElementById('hackathon-btn');
@@ -70,13 +203,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Gallery lightbox
+    // Gallery lightbox (optional per-page)
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.getElementById('lightbox-close');
     const galleryItems = document.querySelectorAll('.gallery-item');
 
     function openLightbox(img) {
+        if (!lightbox || !lightboxImg) return;
         lightboxImg.src = img.src;
         lightboxImg.alt = img.alt;
         lightbox.classList.add('open');
@@ -85,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function closeLightbox() {
+        if (!lightbox) return;
         lightbox.classList.remove('open');
         lightbox.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
@@ -98,8 +233,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-    if (lightbox) lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+    }
+
+    // Home snapshot image rotator (uses gallery images)
+    const snapshotImg = document.getElementById('snapshot-image');
+    if (snapshotImg) {
+        const snapshots = [
+            'https://pbs.twimg.com/media/GoFW54gWgAA-Ls0.jpg',
+            'https://www.pixground.com/wp-content/uploads/2023/05/Yoriichi-Tsugikuni-Demon-Slayer-4K-Anime-Wallpaper-1081x608.jpg',
+            'https://cdn.wallpapersafari.com/63/16/vx2lL5.jpg',
+            'https://m.gettywallpapers.com/wp-content/uploads/2022/02/Cool-Anime-Laptop-Wallpaper-4k.jpg',
+            'https://m.gettywallpapers.com/wp-content/uploads/2023/11/Anime-Desktop-Wallpaper.jpg',
+            'https://wallpapers-clan.com/wp-content/uploads/2025/01/asuke-hypebeast-graffiti-pc-wallpaper-preview.jpg',
+            'https://www.hdwallpapers.in/download/anime_girl_red_black_dress_4k_hd_anime_girl-HD.jpg',
+            'https://www.pixelstalk.net/wp-content/uploads/images6/4K-Anime-Wallpaper-Desktop-1.jpg',
+            'https://cdn.wallpapersafari.com/55/83/Pl6QHc.jpg',
+        ];
+        let idx = 0;
+        setInterval(() => {
+            idx = (idx + 1) % snapshots.length;
+            snapshotImg.style.opacity = '0';
+            setTimeout(() => {
+                snapshotImg.src = snapshots[idx];
+                snapshotImg.style.opacity = '1';
+            }, 300);
+        }, 7000);
+    }
 });
 
 

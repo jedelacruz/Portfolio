@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Jan Emmanuel Dela Cruz</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="fonts/fonts.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="light-mode accent-blue">
+    <div class="custom-cursor" id="custom-cursor">
+        <div class="custom-cursor-dot"></div>
+    </div>
+    <div class="custom-cursor-trail" id="cursor-trail"></div>
+
+    <nav class="navbar" id="navbar" aria-label="Main">
+        <div class="navbar-inner">
+            <div class="navbar-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <a href="contact.html" class="nav-link active">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-right" aria-label="Theme">
+        <div class="navbar-inner">
+            <div class="color-picker-wrap">
+                <button type="button" id="color-picker-btn" class="nav-icon-btn" aria-label="Accent color"
+                    title="Accent color">
+                    <i class="fa-solid fa-palette"></i>
+                </button>
+                <div class="color-picker-dropdown" id="color-picker-dropdown">
+                    <button type="button" class="color-swatch" data-accent="blue" aria-label="Blue"
+                        style="--swatch: #2563eb;"></button>
+                    <button type="button" class="color-swatch" data-accent="emerald" aria-label="Emerald"
+                        style="--swatch: #059669;"></button>
+                    <button type="button" class="color-swatch" data-accent="violet" aria-label="Violet"
+                        style="--swatch: #7c3aed;"></button>
+                    <button type="button" class="color-swatch" data-accent="amber" aria-label="Amber"
+                        style="--swatch: #d97706;"></button>
+                    <button type="button" class="color-swatch" data-accent="rose" aria-label="Rose"
+                        style="--swatch: #e11d48;"></button>
+                </div>
+            </div>
+            <button type="button" id="theme-toggle" class="nav-icon-btn" aria-label="Dark mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <div class="container">
+        <header class="bento-card page-hero fade-in">
+            <div class="eyebrow">Let’s connect</div>
+            <h1>Contact</h1>
+            <p>
+                If you’re hiring, collaborating, or just want to say hi — I’m easy to reach. I reply fast and keep
+                communication clear.
+            </p>
+        </header>
+
+        <div class="bento-grid fade-in" aria-label="Contact content">
+            <section class="bento-card bento-span-6 fill-height">
+                <h3 class="card-header">
+                    <i class="fa-solid fa-link"></i> Social links
+                </h3>
+                <div class="social-grid">
+                    <a href="https://www.linkedin.com/in/jedelacruz21/" target="_blank" class="social-btn"><i
+                            class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/jedelacruz" target="_blank" class="social-btn"><i
+                            class="fa-brands fa-github"></i> GitHub</a>
+                    <a href="https://www.instagram.com/definitelyynotje/" target="_blank" class="social-btn"><i
+                            class="fa-brands fa-instagram"></i> Instagram</a>
+                    <a href="https://www.facebook.com/je.things.1/" target="_blank" class="social-btn"><i
+                            class="fa-brands fa-facebook"></i> Facebook</a>
+                </div>
+            </section>
+
+            <section class="bento-card bento-span-6 fill-height">
+                <h3 class="card-header">
+                    <i class="fa-regular fa-comments"></i> Recommendations
+                </h3>
+                <div class="recommendation-content">
+                    <div class="recommender">
+                        <strong>Mr. Relluz Reyes</strong>
+                        <span>Trainer at Alorica</span>
+                        <p>"He is great, highly adaptive, and gets things done fast."</p>
+                    </div>
+                    <div class="recommender">
+                        <strong>Mr. John Santos</strong>
+                        <span>Team Lead at JEAI</span>
+                        <p>"Extremely resourceful and consistently delivers high-quality work."</p>
+                    </div>
+                    <div class="recommender">
+                        <strong>Ms. Carla Mendoza</strong>
+                        <span>Mentor at PUP Tech Club</span>
+                        <p>"Quick learner, creative problem-solver, and a team player."</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bento-card bento-span-7">
+                <h3 class="card-header"><i class="fa-regular fa-paper-plane"></i> Quick message</h3>
+                <div class="text-content">
+                    <p>
+                        Use this button to draft an email. If you include a short context (role, project, or timeline),
+                        I can respond faster.
+                    </p>
+                </div>
+                <div class="form-actions" style="margin-top: 10px;">
+                    <a class="btn btn-primary" href="mailto:2janemmanueldelacruz21@gmail.com?subject=Hello%20JE%20%E2%80%94%20Let%27s%20talk">
+                        <i class="fa-regular fa-envelope"></i> Email me
+                    </a>
+                    <a class="btn btn-secondary" href="Resume_DelaCruzJanEmmanuel.pdf" download>
+                        <i class="fa-solid fa-download"></i> Download CV
+                    </a>
+                </div>
+                <div class="split-row" style="margin-top: var(--gap);">
+                    <div class="bento-card">
+                        <h3 class="card-header"><i class="fa-solid fa-at"></i> Email</h3>
+                        <p class="text-content">2janemmanueldelacruz21@gmail.com</p>
+                        <a href="mailto:2janemmanueldelacruz21@gmail.com" class="link-arrow">Send message <i
+                                class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                    <div class="bento-card">
+                        <h3 class="card-header"><i class="fa-solid fa-phone"></i> Phone</h3>
+                        <p class="text-content">0991 536 1389</p>
+                        <a href="tel:+639915361389" class="link-arrow">Call me <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bento-card bento-span-5">
+                <h3 class="card-header"><i class="fa-solid fa-clock"></i> Availability</h3>
+                <div class="case-grid">
+                    <div class="case">
+                        <h4>Roles</h4>
+                        <p>Customer support, tech support, junior full-stack, and mobile-focused projects.</p>
+                    </div>
+                    <div class="case">
+                        <h4>Working style</h4>
+                        <p>Clear updates, fast iterations, and strong ownership from start to finish.</p>
+                    </div>
+                    <div class="case">
+                        <h4>Best way to start</h4>
+                        <p>Send a message with your goal + timeline. I’ll respond with next steps.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="footer fade-in">
+            <p>&copy; 2026 Jan Emmanuel Dela Cruz. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

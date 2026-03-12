@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery | Jan Emmanuel Dela Cruz</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="fonts/fonts.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="light-mode accent-blue">
+    <div class="custom-cursor" id="custom-cursor">
+        <div class="custom-cursor-dot"></div>
+    </div>
+    <div class="custom-cursor-trail" id="cursor-trail"></div>
+
+    <nav class="navbar" id="navbar" aria-label="Main">
+        <div class="navbar-inner">
+            <div class="navbar-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="gallery.html" class="nav-link active">Gallery</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-right" aria-label="Theme">
+        <div class="navbar-inner">
+            <div class="color-picker-wrap">
+                <button type="button" id="color-picker-btn" class="nav-icon-btn" aria-label="Accent color"
+                    title="Accent color">
+                    <i class="fa-solid fa-palette"></i>
+                </button>
+                <div class="color-picker-dropdown" id="color-picker-dropdown">
+                    <button type="button" class="color-swatch" data-accent="blue" aria-label="Blue"
+                        style="--swatch: #2563eb;"></button>
+                    <button type="button" class="color-swatch" data-accent="emerald" aria-label="Emerald"
+                        style="--swatch: #059669;"></button>
+                    <button type="button" class="color-swatch" data-accent="violet" aria-label="Violet"
+                        style="--swatch: #7c3aed;"></button>
+                    <button type="button" class="color-swatch" data-accent="amber" aria-label="Amber"
+                        style="--swatch: #d97706;"></button>
+                    <button type="button" class="color-swatch" data-accent="rose" aria-label="Rose"
+                        style="--swatch: #e11d48;"></button>
+                </div>
+            </div>
+            <button type="button" id="theme-toggle" class="nav-icon-btn" aria-label="Dark mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <div class="container">
+        <header class="bento-card page-hero fade-in">
+            <div class="eyebrow">Bento</div>
+            <h1>Gallery</h1>
+            <p>
+                A longer, bento-style gallery of visuals that inspire my design taste — urban, minimal, and high contrast.
+                Click any image to open it in a lightbox.
+            </p>
+        </header>
+
+        <div class="bento-grid fade-in" aria-label="Gallery content">
+            <section class="gallery-container bento-card bento-span-12" id="gallery">
+                <div class="gallery-header">
+                    <h3 class="card-header">
+                        <i class="fa-regular fa-images"></i> Scroll gallery
+                    </h3>
+                    <div class="gallery-controls">
+                        <button id="scroll-left" class="nav-btn" aria-label="Scroll left">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button id="scroll-right" class="nav-btn" aria-label="Scroll right">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="gallery-scroll" id="gallery-scroll">
+                    <div class="gallery-item">
+                        <img src="https://pbs.twimg.com/media/GoFW54gWgAA-Ls0.jpg" alt="Visual 1" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://www.pixground.com/wp-content/uploads/2023/05/Yoriichi-Tsugikuni-Demon-Slayer-4K-Anime-Wallpaper-1081x608.jpg"
+                            alt="Visual 2" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://cdn.wallpapersafari.com/63/16/vx2lL5.jpg" alt="Visual 3" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://m.gettywallpapers.com/wp-content/uploads/2022/02/Cool-Anime-Laptop-Wallpaper-4k.jpg"
+                            alt="Visual 4" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://m.gettywallpapers.com/wp-content/uploads/2023/11/Anime-Desktop-Wallpaper.jpg"
+                            alt="Visual 5" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://wallpapers-clan.com/wp-content/uploads/2025/01/asuke-hypebeast-graffiti-pc-wallpaper-preview.jpg"
+                            alt="Visual 6" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://www.hdwallpapers.in/download/anime_girl_red_black_dress_4k_hd_anime_girl-HD.jpg"
+                            alt="Visual 7" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://www.pixelstalk.net/wp-content/uploads/images6/4K-Anime-Wallpaper-Desktop-1.jpg"
+                            alt="Visual 8" />
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://cdn.wallpapersafari.com/55/83/Pl6QHc.jpg" alt="Visual 9" />
+                    </div>
+                </div>
+            </section>
+
+            <section class="bento-card bento-span-6 bento-tight">
+                <h3 class="card-header"><i class="fa-solid fa-pen-nib"></i> Design cues</h3>
+                <div class="text-content">
+                    <p><strong>Contrast:</strong> strong silhouettes, readable hierarchy.</p>
+                    <p><strong>Rhythm:</strong> consistent spacing and modular “cards”.</p>
+                    <p><strong>Texture:</strong> subtle glass + border, never noisy.</p>
+                </div>
+            </section>
+
+            <section class="bento-card bento-span-6 bento-tight">
+                <h3 class="card-header"><i class="fa-solid fa-music"></i> What I’m into</h3>
+                <div class="tags">
+                    <span>Music</span><span>Travel</span><span>Urban culture</span><span>Anime art</span><span>Minimal UI</span><span>Street photography</span>
+                </div>
+                <div class="text-content" style="margin-top: 10px;">
+                    <p>These influences show up in my UI choices: bold highlights, clean lines, and “bento” composition.</p>
+                </div>
+            </section>
+        </div>
+
+        <footer class="footer fade-in">
+            <p>&copy; 2026 Jan Emmanuel Dela Cruz. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+        <img src="" alt="" id="lightbox-img" />
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
